@@ -15,7 +15,19 @@ class ContactsView(TemplateView):
                 'phone': '+7-999-11-11111',
                 'email': 'geeklab@spb.ru',
                 'adress': 'территория Петропавловская крепость, 3Ж'
-            }
+            },    {
+                'map': 'https://yandex.ru/map-widget/v1/-/CCUAZHX3xB',
+                'city': 'Казань',
+                'phone': '+7-999-22-22222',
+                'email': 'geeklab@kz.ru',
+                'adress': 'территория Кремль, 11, Казань, Республика Татарстан, Россия'
+            },    {
+                'map': 'https://yandex.ru/map-widget/v1/-/CCUAZHh9kD',
+                'city': 'Москва',
+                'phone': '+7-999-33-33333',
+                'email': 'geeklab@msk.ru',
+                'adress': 'Красная площадь, 7, Москва, Россия'
+            },
         ]
         return context_data
 
