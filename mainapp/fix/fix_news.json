@@ -1,0 +1,15 @@
+[
+  {
+    "model": "mainapp.news",
+    "pk": 1,
+    "fields": {
+      "title": "��� ������� ���",
+      "preamble": "��� �������� ������� ���",
+      "body": "��� ������ �������",
+      "body_as_markdown": false,
+      "created": "2022-06-03T13:16:27.178Z",
+      "updated": "2022-06-03T13:16:27.178Z",
+      "deleted": false
+    }
+  }
+]
