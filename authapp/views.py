@@ -45,7 +45,10 @@ class RegisterView(TemplateView):
                 new_user.save()
                 messages.add_message(request, messages.INFO, 'Регистрация прошла успешно')
                 return HttpResponseRedirect(reverse('authapp:login'))
-        except:
+            else:
+                messages.add_message(request, messages.WARNING, 'Что-то пошло не так')
+                return HttpResponseRedirect(reverse('authapp:register'))
+        except Exception as ex:
             messages.add_message(request, messages.WARNING, 'Что-то пошло не так')
             return HttpResponseRedirect(reverse('authapp:register'))
 
