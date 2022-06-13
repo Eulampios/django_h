@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -7,7 +8,7 @@ from django.views.generic import TemplateView
 from authapp.models import User
 
 
-class LoginView(TemplateView):
+class CustomLoginView(LoginView):
     template_name = 'authapp/login.html'
     extra_context = {
         'title': 'Вход пользователя'
