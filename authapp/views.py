@@ -7,7 +7,7 @@ class LoginView(TemplateView):
 
 
 class RegisterView(TemplateView):
-    pass
+    template_name = 'authapp/register.html'
 
 
 class LogoutView(TemplateView):
