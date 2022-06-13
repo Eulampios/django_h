@@ -28,10 +28,18 @@
         <p>
             <a href="/"><img src="/static/img/logo.png" alt=""></a>
         </p>
-        <h2>Вход пользователя</h2>
+        <h2>{{ title }}</h2>
         {% block content %}
         {% endblock %}
-
+        </p>
+        <h4>Вход через социальные сети</h4>
+        <p>
+        <div class="btn-group btn-block" role="group">
+            <a class="btn btn-primary" href="#" role="button"><i class="fab fa-vk"></i></a>
+            <a class="btn btn-primary" href="#" role="button"><i class="fab fa-github"></i></a>
+            <a class="btn btn-primary" href="#" role="button"><i class="fab fa-facebook"></i></a>
+        </div>
+        </p>
     </div>
 </div>
 
@@ -47,6 +55,10 @@
 
 <!-- FontAwesome -->
 <script src="/js/fontawesome.all.min.js"></script>
+
+{% block js %}
+
+{% endblock %}
 
 
 </body>

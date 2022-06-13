@@ -1,18 +1,56 @@
 {% extends 'authapp/base.html' %}
 {% block content %}
-<form>
-   register
+<form method="POST">
+    {% csrf_token %}
+    <p>
+        <input type="text" name="username" autofocus=""
+               autocapitalize="none" autocomplete="username"
+               maxlength="150" class="textinput textInput form-control"
+               required="" id="id_username" placeholder="Username">
+    </p>
+    <p>
+        <input type="password" name="password1"
+               autocomplete="current-password"
+               class="textinput textInput form-control" required=""
+               id="id_password1" placeholder="Password">
+    </p>
+    <p>
+        <input type="password" name="password2"
+               autocomplete="current-password"
+               class="textinput textInput form-control" required=""
+               id="id_password2" placeholder="Password">
+    </p>
+    <p>
+        <button type="submit"
+                class="btn btn-primary btn-block">Зарегистрироваться
+        </button>
+    </p>
 </form>
-<p class="text-right">
-    <a href=""><small>Забыли пароль?</small></a>
-</p>
-<h4>Вход через социальные сети</h4>
 <p>
-<div class="btn-group btn-block" role="group">
-    <a class="btn btn-primary" href="#" role="button"><i class="fab fa-vk"></i></a>
-    <a class="btn btn-primary" href="#" role="button"><i class="fab fa-github"></i></a>
-    <a class="btn btn-primary" href="#" role="button"><i class="fab fa-facebook"></i></a>
+<div class="row justify-content-between">
+    <div class="col">
+        <a
+                href="{% url 'authapp:login' %}"><small>Войти</small></a>
+    </div>
+    <div class="col">
+        <a href="#"><small>Забыли пароль?</small></a>
+    </div>
 </div>
-</p>
 
+
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        {%
+            if messages %}
+// Toasts
+        $(".toast").toast({delay: 5000});
+        $(".toast").toast("show");
+        {%
+            endif %
+        }
+    });
+</script>
 {% endblock %}
