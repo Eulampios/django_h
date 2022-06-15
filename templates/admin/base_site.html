@@ -9,8 +9,8 @@
     </h1>
 {% endblock %}
 
-{##}
-{#{% block welcome-msg %}#}
-{#    ===Мое новое сообщение===#}
-{#    {{ block.super }}#}
-{#{% endblock %}#}
+
+{% block welcome-msg %}
+    ===Мое новое сообщение===
+    {{ block.super }}
+{% endblock %}
