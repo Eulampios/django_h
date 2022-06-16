@@ -20,7 +20,7 @@ class RegisterView(CreateView):
     model = User
     form_class = CustonUserCreationForm
     success_url = reverse_lazy('mainapp:index')
-    # template_name = 'authapp/register.html'
+
 
 
 
