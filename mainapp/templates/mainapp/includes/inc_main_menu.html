@@ -27,7 +27,7 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item ">
-                    <a class="nav-link" href="{% url 'authapp:edit' user.pk %}">{{ user.first_name|default:user.username }}</a>
+                    <a class="nav-link" href="{% url 'authapp:edit' %}">{{ user.first_name|default:user.username }}</a>
                 </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="{% url 'authapp:logout' %}">Выход</a>
