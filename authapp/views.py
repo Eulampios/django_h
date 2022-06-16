@@ -71,6 +71,10 @@ class CustomLogoutView(LogoutView):
 class EditView(UpdateView):
     model = User
     form_class = CustomUserChangeForm
+    template_name = 'authapp/edit.html'
+
+    def get_success_url(self):
+        return reverse_lazy('authapp:edit', args=[self.request.user.pk])
 
 
 
