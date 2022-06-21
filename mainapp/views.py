@@ -2,7 +2,8 @@ import json
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, DetailView, CreateView
 from datetime import datetime
@@ -103,6 +104,16 @@ class CourseDetailView(TemplateView):
             context_data['feedback_form'] = CourseFeedbackForm()
 
         return context_data
+
+
+class CourseFeedbackCreateView(CreateView):
+    model = CourseFeedback
+    form_class = CourseFeedbackForm
+
+    def form_valid(self, form):
+        self.object = form.save()
+        rendered_template = render_to_string('mainapp/includes/feedback_card.html', context={'item': self.object})
+        return JsonResponse({'card': rendered_template})
 
 # class NewsView(TemplateView):
 #     template_name = 'mainapp/news_list.html'
