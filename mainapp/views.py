@@ -96,7 +96,7 @@ class CourseDetailView(TemplateView):
         context_data = super().get_context_data(**kwargs)
         context_data['course_object'] = get_object_or_404(Courses, pk=self.kwargs.get('pk'))
         context_data['lessons'] = Lesson.objects.filter(course=context_data['course_object'])
-        context_data['teachers'] = Teachers.objects.filter(courses=context_data['course_object'])
+        context_data['teachers'] = Teachers.objects.filter(course=context_data['course_object'])
         context_data['feedback_list'] = CourseFeedback.objects.filter(course=context_data['course_object'])
 
         if self.request.user.is_authenticated:
