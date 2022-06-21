@@ -11,7 +11,7 @@ class CourseFeedbackForm(forms.ModelForm):
         widgets = {
             'course': forms.HiddenInput(),
             'user': forms.HiddenInput(),
-            'rating': forms.HiddenInput()
+            # 'rating': forms.HiddenInput()
         }
 
     def __init__(self, *args, course=None, user=None, **kwargs):
