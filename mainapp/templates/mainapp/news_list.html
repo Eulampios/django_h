@@ -20,7 +20,8 @@
                         <h6 class="card-subtitle mb-2 text-muted">
                             {{ item.created|date:"Y-m-d h-i-s" }}
                         </h6>
-                        <p class="card-text">{{ item.preambule }}</p>
+                        <p class="card-text">{{ item.description }}</p>
+{#                                поле называется description или intro#}
                         <div class="row">
                             <div class="col">
                                 <a href="{% url 'mainapp:news_detail' pk=item.pk %}"
