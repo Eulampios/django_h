@@ -107,7 +107,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">Вы ещё не оставляли отзыв к этому
                     курсу</h6>
                 <p class="card-text">
-                <form action="{% url 'mainapp:courses_list_feedback' %}" method="POST"
+                <form action="{% url 'mainapp:courses_feedback' %}" method="POST"
                       id="feedbackForm">
                     {% csrf_token %}
                     {{ feedback_form|crispy }}
