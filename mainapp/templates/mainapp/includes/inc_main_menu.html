@@ -6,6 +6,11 @@
         <li class="nav-item {% if request.resolver_match.view_name == 'mainapp:mainapp.views.CoursesListView' %}active{% endif %} ">
             <a class="nav-link" href="/mainapp/courses_list">Курсы</a>
         </li>
+{#    Добавил для отображения имиени пользователя в меню#}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'authapp:edit' %}">{{ user.first_name|default:user.username }}</a>
+        </li>
+{#    добавил для отображения имени пользователя в меню#}
         {% if user.is_authenticated %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="ddProfile" role="button" data-toggle="dropdown"
@@ -13,7 +18,8 @@
                     Профиль
                 </a>
                 <div class="dropdown-menu" aria-labelledby="ddProfile">
-                    <a class="dropdown-item" href="{% url 'authapp:edit' %}">Редактировать профиль</a>
+                    <a class="dropdown-item" href="{% url 'authapp:edit' %}">Редактировать профиль: {{ user.first_name|default:user.username }}</a>
+{#                    {{ user.first_name|default:user.username }} - добавил в строке выше для отображения в меню#}
                     <a class="dropdown-item" href="#">Мои курсы</a>
                     <div class="dropdown-divider"></div>
                     {% if user.is_staff %}
