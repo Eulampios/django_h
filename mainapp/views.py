@@ -1,13 +1,14 @@
 import json
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, DetailView, CreateView
 from datetime import datetime
 
-from mainapp.models import News
+from mainapp.forms import CourseFeedbackForm
+from mainapp.models import News, Courses, Lesson, Teachers, CourseFeedback
 
 
 class ContactsView(TemplateView):
@@ -39,8 +40,9 @@ class ContactsView(TemplateView):
         return context_data
 
 
-class CoursesListView(TemplateView):
+class CoursesListView(ListView):
     template_name = 'mainapp/courses_list.html'
+    model = Courses
 
 
 class DocSiteView(TemplateView):
@@ -87,9 +89,21 @@ class NewsDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = ('mainapp.delete_news',)
 
 
+class CourseDetailView(TemplateView):
+    template_name = 'mainapp/courses_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['course_object'] = get_object_or_404(Courses, pk=self.kwargs.get('pk'))
+        context_data['lessons'] = Lesson.objects.filter(course=context_data['course_object'])
+        context_data['teachers'] = Teachers.objects.filter(course=context_data['course_object'])
+        context_data['feedback_list'] = CourseFeedback.objects.filter(course=context_data['course_object'])
 
+        if self.request.user.is_authenticated:
+            context_data['feedback_form'] = CourseFeedbackForm(course=context_data['course_object'],
+                                                               user=self.request.user)
 
+        return context_data
 
 # class NewsView(TemplateView):
 #     template_name = 'mainapp/news_list.html'
