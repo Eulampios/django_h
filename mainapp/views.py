@@ -55,7 +55,7 @@ class LoginView(TemplateView):
     template_name = 'mainapp/login.html'
 
 
-class NewsView(ListView):
+class NewsListView(ListView):
     model = News
     paginate_by = 5
 
