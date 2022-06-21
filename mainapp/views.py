@@ -1,6 +1,10 @@
+import json
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect
+from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, DetailView, CreateView
 from datetime import datetime
+
+from mainapp.models import News
 
 
 class ContactsView(TemplateView):
@@ -48,32 +52,41 @@ class LoginView(TemplateView):
     template_name = 'mainapp/login.html'
 
 
-class NewsView(TemplateView):
-    template_name = 'mainapp/news.html'
+class NewsView(ListView):
+    model = News
+    paginate_by = 5
 
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        context_data['object_list'] = [
-            {
-                'title': 'Заголовок новости 1',
-                'description': 'Описание новости 1',
-                'date': datetime.now()
-            }, {
-                'title': 'Заголовок новости 2',
-                'description': 'Описание новости 2',
-                'date': datetime.now()
-            }, {
-                'title': 'Заголовок новости 3',
-                'description': 'Описание новости 3',
-                'date': datetime.now()
-            }, {
-                'title': 'Заголовок новости 4',
-                'description': 'Описание новости 4',
-                'date': datetime.now()
-            }, {
-                'title': 'Заголовок новости 5',
-                'description': 'Описание новости 5',
-                'date': datetime.now()
-            }
-        ]
-        return context_data
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted=False)
+
+
+
+# class NewsView(TemplateView):
+#     template_name = 'mainapp/news_list.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context_data = super().get_context_data(**kwargs)
+#         context_data['object_list'] = [
+#             {
+#                 'title': 'Заголовок новости 1',
+#                 'description': 'Описание новости 1',
+#                 'date': datetime.now()
+#             }, {
+#                 'title': 'Заголовок новости 2',
+#                 'description': 'Описание новости 2',
+#                 'date': datetime.now()
+#             }, {
+#                 'title': 'Заголовок новости 3',
+#                 'description': 'Описание новости 3',
+#                 'date': datetime.now()
+#             }, {
+#                 'title': 'Заголовок новости 4',
+#                 'description': 'Описание новости 4',
+#                 'date': datetime.now()
+#             }, {
+#                 'title': 'Заголовок новости 5',
+#                 'description': 'Описание новости 5',
+#                 'date': datetime.now()
+#             }
+#         ]
+#         return context_data
