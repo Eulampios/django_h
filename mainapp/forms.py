@@ -15,7 +15,7 @@ class CourseFeedbackForm(forms.ModelForm):
         }
 
     def __init__(self, *args, course=None, user=None, **kwargs):
-        super().__init__(*args, course, user, **kwargs)
+        super().__init__(*args, **kwargs)
         if course and user:
             self.fields['course'].initial = course.pk
             self.fields['user'].initial = user.pk

@@ -100,8 +100,7 @@ class CourseDetailView(TemplateView):
         context_data['feedback_list'] = CourseFeedback.objects.filter(course=context_data['course_object'])
 
         if self.request.user.is_authenticated:
-            context_data['feedback_form'] = CourseFeedbackForm(course=context_data['course_object'],
-                                                               user=self.request.user)
+            context_data['feedback_form'] = CourseFeedbackForm()
 
         return context_data
 
