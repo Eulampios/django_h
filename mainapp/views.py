@@ -1,6 +1,9 @@
 import json
+
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, DetailView, CreateView
 from datetime import datetime
 
@@ -19,13 +22,13 @@ class ContactsView(TemplateView):
                 'phone': '+7-999-11-11111',
                 'email': 'geeklab@spb.ru',
                 'adress': 'территория Петропавловская крепость, 3Ж'
-            },    {
+            }, {
                 'map': 'https://yandex.ru/map-widget/v1/-/CCUAZHX3xB',
                 'city': 'Казань',
                 'phone': '+7-999-22-22222',
                 'email': 'geeklab@kz.ru',
                 'adress': 'территория Кремль, 11, Казань, Республика Татарстан, Россия'
-            },    {
+            }, {
                 'map': 'https://yandex.ru/map-widget/v1/-/CCUAZHh9kD',
                 'city': 'Москва',
                 'phone': '+7-999-33-33333',
@@ -58,6 +61,33 @@ class NewsView(ListView):
 
     def get_queryset(self):
         return super().get_queryset().filter(deleted=False)
+
+
+class NewsDetailView(DetailView):
+    model = News
+
+
+class NewsCreateView(PermissionRequiredMixin, CreateView):
+    model = News
+    fields = '__all__'
+    success_url = reverse_lazy('mainapp:news')
+    permission_required = ('mainapp.add_news',)
+
+
+class NewsUpdateView(PermissionRequiredMixin, UpdateView):
+    model = News
+    fields = '__all__'
+    success_url = reverse_lazy('mainapp:news')
+    permission_required = ('mainapp.change_news',)
+
+
+class NewsDeleteView(PermissionRequiredMixin, DeleteView):
+    model = News
+    success_url = reverse_lazy('mainapp:news')
+    permission_required = ('mainapp.delete_news',)
+
+
+
 
 
 
