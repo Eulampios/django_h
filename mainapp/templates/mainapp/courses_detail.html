@@ -21,8 +21,7 @@
                     <p>
                         <small>Преподаватели</small><br>
                         {% for item in teachers %}
-                            {{ item.name_second }} {{ item.name_first }}{% if forloop.last %}{%
-                            else %},{% endif %}
+                            {{ item.name_second }} {{ item.name_first }}{% if forloop.last %}{% else %},{% endif %}
                         {% endfor %}
                     </p>
                 </div>
